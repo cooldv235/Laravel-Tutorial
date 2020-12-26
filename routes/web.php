@@ -71,6 +71,18 @@ Route::get('/',function(){
     return view('welcome');
 });
 
-Route::get('/contact',function(){
-    return view('contact');
+Route::get('/generic',function(){
+    // $article = App\Models\Article::all();            // Fetch all the records of the table
+    // $article = App\Models\Article::take(2)->get();  // take(N) number of records from the table 
+    // $article = App\Models\Article::paginate(2);     // paginate(N) number of records 
+    //    $article = App\Models\Article::latest()->get();    // latest('column_name') ORDER BY column_name DESC BY DEFAULT is created_at  
+    //    $article = App\Models\Article::take(3)->latest()->get(); Take the 3 most recent articles
+
+    return view('generic',[
+        'articles' => App\Models\Article::latest()->get()
+    ]);
+});
+
+Route::get('/elements',function(){
+    return view('elements');
 });
