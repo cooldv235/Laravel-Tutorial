@@ -4,7 +4,7 @@ use App\Http\Controllers\WelcomeController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;   // Laravel 8 no longer automatically applies a controller namespace to your route definitions.
-
+use App\Http\Controllers\ArticlesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,17 +71,24 @@ Route::get('/',function(){
     return view('welcome');
 });
 
-Route::get('/generic',function(){
-    // $article = App\Models\Article::all();            // Fetch all the records of the table
-    // $article = App\Models\Article::take(2)->get();  // take(N) number of records from the table 
-    // $article = App\Models\Article::paginate(2);     // paginate(N) number of records 
-    //    $article = App\Models\Article::latest()->get();    // latest('column_name') ORDER BY column_name DESC BY DEFAULT is created_at  
-    //    $article = App\Models\Article::take(3)->latest()->get(); Take the 3 most recent articles
+// Route::get('/articles',function(){
+//     // $article = App\Models\Article::all();            // Fetch all the records of the table
+//     // $article = App\Models\Article::take(2)->get();  // take(N) number of records from the table 
+//     // $article = App\Models\Article::paginate(2);     // paginate(N) number of records 
+//     //    $article = App\Models\Article::latest()->get();    // latest('column_name') ORDER BY column_name DESC BY DEFAULT is created_at  
+//     //    $article = App\Models\Article::take(3)->latest()->get(); Take the 3 most recent articles
 
-    return view('generic',[
-        'articles' => App\Models\Article::latest()->get()
-    ]);
-});
+//     return view('articles',[
+//         'articles' => App\Models\Article::latest()->get()
+//     ]);
+// });
+
+Route::get('/articles',[ArticlesController::class,'index']);
+Route::post('/articles',[ArticlesController::class,'store']);
+Route::get('articles/create',[ArticlesController::class,'create']);
+Route::get('articles/{article}',[ArticlesController::class,'show']);
+
+// Route::get('articles/create',[ArticlesController::class,'create']);  Cannot do a route like this
 
 Route::get('/elements',function(){
     return view('elements');

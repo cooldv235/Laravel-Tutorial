@@ -30,10 +30,10 @@
                             
                             @foreach($articles as $article)
                             <header>
-									<h2>{{ $article->title }}</h2>
+									<h2><a href="/articles/{{$article->id}}">{{ $article->title }}</a></h2>
 									<p>{{ $article->excerpt }}</p>
                             </header>
-                            <p>{{ $article->body }}</p>
+                            <p style="color:darkslategrey">{{ $article->body }}</p>
                             @endforeach
 
 
