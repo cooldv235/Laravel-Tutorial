@@ -13,7 +13,10 @@
 				<div class="inner">
 					<header class="align-center">
 						<p>Eleifend vitae urna</p>
-						<h2>Generic Page Template</h2>
+						<h2>Articles Page</h2>
+						<div class="12u$">
+                                <a class="button" href="/articles/create">NEW ARTICLE</a>
+                        </div>
 					</header>
 				</div>
 			</section>
@@ -24,13 +27,13 @@
 					<div class="box">
 						<div class="content">
 							<header class="align-center">
-								<p>maecenas sapien feugiat ex purus</p>
-								<h2>Lorem ipsum dolor</h2>
+								<p>make articles of your own</p>
+								<h2>List of articles</h2>
                             </header>
                             
                             @foreach($articles as $article)
                             <header>
-									<h2><a href="/articles/{{$article->id}}">{{ $article->title }}</a></h2>
+									<h2><a href="{{ $article->path() }}">{{ $article->title }}</a> <span><a href="/articles/{{ $article->id }}/edit" class="button small pull-right">Edit</a></span></h2>
 									<p>{{ $article->excerpt }}</p>
                             </header>
                             <p style="color:darkslategrey">{{ $article->body }}</p>

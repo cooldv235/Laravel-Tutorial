@@ -12,7 +12,7 @@
 			<section id="One" class="wrapper style3">
 				<div class="inner">
 					<header class="align-center">
-						<h2>Create a New Article</h2>
+						<h2>Edit Article</h2>
 					</header>
 				</div>
 			</section>
@@ -22,18 +22,13 @@
 				<div class="inner">
 					<div class="box">
 						<div class="content">
-                            <form method="POST" action="/articles">
+                            <form method="POST" action="/articles/{{ $article->id }}">
                                 @csrf
+                                @method('PUT')
                                 
                                 <div class="6u 12u$(xsmall)">
                                     <label for="title">Title: </label>
-                                    <input 
-                                        type="text" 
-                                        class="" 
-                                        name="title" 
-                                        id="name" 
-                                        value="{{ old('title') }}" 
-                                        placeholder="Name" />
+                                    <input type="text" name="title" id="name" value="{{ $article->title }}" placeholder="Name" />
 
                                     @error('title')
                                         <p><strong>{{ $errors->first('title') }}</strong></p>
@@ -42,13 +37,7 @@
 
                                 <div class="6u 12u$(xsmall)">
                                     <label for="excerpt">Excerpt: </label>
-                                    <textarea 
-                                        name="excerpt" 
-                                        id="message" 
-                                        placeholder="Excerpt of your article" 
-                                        rows="3">
-                                        {{ old('excerpt') }}
-                                    </textarea>
+                                    <textarea name="excerpt" id="message" placeholder="Excerpt of your article" rows="3">{{ $article->excerpt }}</textarea>
 
                                     @error('excerpt')
                                         <p><strong>{{ $errors->first('excerpt') }}</strong></p>
@@ -57,13 +46,7 @@
 
                                 <div class="6u 12u$(xsmall)">
                                     <label for="body">Body: </label>
-                                    <textarea 
-                                        name="body" 
-                                        id="message" 
-                                        placeholder="Body of your article" 
-                                        rows="6">
-                                        {{ old('body') }}
-                                    </textarea>
+                                    <textarea name="body" id="message" placeholder="Body of your article" rows="6">{{ $article->body }}</textarea>
 
                                     @error('body')
                                         <p><strong>{{ $errors->first('body') }}</strong></p>
@@ -71,7 +54,7 @@
                                 </div><br>
 
                                 <div class="12u$">
-                                    <input type="submit" value="Create" />
+                                    <input type="submit" value="Update" />
                                 </div>
                             </form>
 

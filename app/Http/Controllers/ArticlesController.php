@@ -14,10 +14,10 @@ class ArticlesController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Article $article)
     {
         // dd($id);
-        $article = Article::find($id);
+        // $article = Article::find($id);
 
         return view('articles.show',['article' => $article]);
     }
@@ -29,14 +29,33 @@ class ArticlesController extends Controller
 
     public function store()
     {
-        $article = new Article;
+        Article::create($this->validateArticle());
 
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
+        return redirect(route('articles.index'));
+    }
 
-        $article->save();
+    public function edit(Article $article)
+    {
+        // $article = Article::find($id);
 
-        return redirect('/articles');
+        return view('articles.edit',compact('article'));
+    }
+
+    public function update(Article $article)
+    {
+        $article->update($this->validateArticle());
+
+        // return redirect(route('articles.show',$article));
+        return redirect($article->path());
+
+    }
+
+    protected function validateArticle()
+    {
+        return request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required'
+        ]);
     }
 }
